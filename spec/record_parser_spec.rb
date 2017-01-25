@@ -1,14 +1,14 @@
 require_relative '../record_parser'
 
 describe RecordParser do
-  let (:data) { "LastName|FirstName|FavoriteColor|DateOfBirth Moreno|Laura|Blue|2017-01-17"}
-  let (:result) { }
+  let (:data) { "LastName|FirstName|FavoriteColor|DateOfBirth"}
+  let (:result) { "LastName|FirstName|FavoriteColor|DateOfBirth" }
   let (:pipe_file) { RecordParser.parse("records_pipe_delimited.csv") }
   let (:comma_file) { RecordParser.parse("records.csv") }
 
   context 'should read in the CSV' do
     it "should parse file content and return a result" do
-      expect(File.to receive(:open).with("filename").to eq(result))
+      expect(File.to receive(:open).with("filename").to eq result
     end
   end
 

@@ -11,7 +11,6 @@ module RecordParser
           output << Person.new(new_row)
         end
       else
-        p "got here"
          CSV.foreach(filename, :headers => true) do |row|
           new_row = (row.to_hash)
           output << Person.new(new_row)
