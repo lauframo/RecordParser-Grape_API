@@ -3,7 +3,7 @@
 require_relative '../person'
 
 describe Person do
-	let(:laura_args) { {"FirstName": "Laura", "LastName": "Moreno", "FavoriteColor": "cerulean", "DateOfBirth": '2017-01-23' } }
+	let(:laura_args) { {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> '2017-01-23' } }
 	let(:laura) { Person.new(laura_args)}
 
 	context 'it has readeable attribuets' do
