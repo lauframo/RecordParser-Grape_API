@@ -6,7 +6,7 @@ describe Person do
 	let(:laura_args) { {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> '2017-01-23' } }
 	let(:laura) { Person.new(laura_args)}
 
-	context 'it has readeable attribuets' do
+	context 'it has readeable attributes' do
 
 		it 'returns a first name' do
 			expect(laura.first_name).to eq "Laura"

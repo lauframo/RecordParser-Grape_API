@@ -2,6 +2,7 @@
 
 
 class Person
+  attr_reader :first_name, :last_name, :favorite_color, :birth_date
 
   def initialize(args)
     @first_name = args["FirstName"]
