@@ -1,5 +1,6 @@
 ##LastName, FirstName, FavoriteColor, DateOfBirth
 
+require_relative '../database_writer'
 
 class Person
   attr_reader :first_name, :last_name, :favorite_color, :birth_date
@@ -32,17 +33,25 @@ class Person
       b.last_name <=> a.last_name
     end
   end
+
+  def save
+    test = DatabaseWriter.write(self)
+  end
+
 end
 
 
-laura_args = {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> '2017-01-23' } 
+laura_args = {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> '2017-01-23' }
 laura = Person.new(laura_args)
-josh_args = { "FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> '2017-01-19' } 
+josh_args = { "FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> '2017-01-19' }
 josh = Person.new(josh_args)
-donna_args = { "FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> '2016-02-25' } 
+donna_args = { "FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> '2016-02-25' }
 donna =  Person.new(donna_args)
 
 p Person.all
 p Person.sort_by_color
 p Person.sort_by_birthdate
 p Person.sort_by_surname
+
+
+
