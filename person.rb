@@ -32,9 +32,6 @@ class Person
       b.last_name <=> a.last_name
     end
   end
-
-
-
 end
 
 
