@@ -4,11 +4,12 @@ describe Database do
   let(:jed_args) { {"FirstName"=> "Jed", "LastName"=> "Barlett", "FavoriteColor"=> "navy", "DateOfBirth"=> '2015-10-20' } }
   let(:jed) { Person.new(jed_args)}
   let(:toby_args) { {"FirstName"=> "Toby", "LastName"=> "Ziegler", "FavoriteColor"=> "magenta", "DateOfBirth"=> '1985-10-15' } }
-  let(:jed) { Person.new(jed_args)}
+  let(:toby) { Person.new(toby_args)}
 
   context 'it initializes the database' do
     it 'raises an error if database object has not be initialized' do
-      database_file = File.read('database.csv').to raise_error
+      database_file = File.read('database.csv')
+      expect(File.read('database.csv')).to raise_error(RuntimeError)
     end
 
     it 'creates a database file with only headers' do
@@ -24,14 +25,14 @@ describe Database do
     it 'raises an error if a non-Person object is passed to be added' do
       database = Database.new
       item = "Ziegler,Toby,magenta,1985-10-15"
-      expect(database.add(item)).to raise_error("Not an instance of Person class")
+      expect(database.add(item)).to raise_error
     end
 
     it 'adds a Person object as a new row in database file' do
       database = Database.new
-      database.add(jed)
+      database.add(toby)
       database_file = File.read('database.csv')
-      expected_string = "LastName,FirstName,FavoriteColor,DateOfBirth\nZiegler,Toby,magenta,1985-10-15"
+      expected_string = "LastName,FirstName,FavoriteColor,DateOfBirth\nZiegler,Toby,magenta,1985-10-15\n"
       expect(database_file).to eq expected_string
     end
 
