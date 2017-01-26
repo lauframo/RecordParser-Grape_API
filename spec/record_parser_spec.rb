@@ -24,6 +24,11 @@ describe RecordParser do
   end
 
   context 'converted to Person class instances' do
+
+    it 'created Person objects for each row' do
+      expect(Person.count).to eq 2
+    end
+
     it 'converted each pipe-delimited record to an instance of a Person class' do
       expect(pipe_file.first.class).to eq Person
     end
