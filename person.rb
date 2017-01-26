@@ -15,4 +15,9 @@ class Person
     ObjectSpace.each_object(self).to_a
   end
 
+  def self.sort_by_color
+    self.all.sort! do |a, b|
+      a.favorite_color.downcase <=> b.favorite_color.downcase
+  end
+
 end
