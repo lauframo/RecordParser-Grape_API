@@ -38,7 +38,6 @@ describe Person do
   end
 
   context 'it sorts by desired attribute' do
-
     it 'sorts by favorite color descending, then by last name ascending' do
     	expect(Person.sort_by_color).to eq([josh, laura, donna])
     end
@@ -50,9 +49,18 @@ describe Person do
     it 'sorts by last name descending' do
     	expect(Person.sort_by_surname).to eq([donna, laura, josh])
     end
-
   end
 
+  context 'saves instances to the database' do
+
+    it 'takes an instances and saves it to database' do
+       expected_database = File.read('records.csv')
+       generated_database = File.read('database.csv')
+
+       expect(generated_database) == expected_database
+    end
+
+  end
 
 
   end
