@@ -17,7 +17,18 @@ class Person
 
   def self.sort_by_color
     self.all.sort! do |a, b|
-      a.favorite_color.downcase <=> b.favorite_color.downcase
+      [b.favorite_color.downcase, a.last_name.downcase] <=> [a.favorite_color.downcase, b.favorite_color.downcase]
+    end
   end
 
 end
+
+
+laura_args = {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> '2017-01-23' } 
+laura = Person.new(laura_args)
+josh_args = { "FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> '2017-01-19' } 
+josh = Person.new(josh_args)
+donna_args = { "FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> '2016-02-25' } 
+donna =  Person.new(donna_args)
+
+p Person.sort_by_color
