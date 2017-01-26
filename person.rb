@@ -27,6 +27,12 @@ class Person
     end
   end
 
+  def self.sort_by_surname
+    self.all.sort do |a, b|
+      b.last_name <=> a.last_name
+    end
+  end
+
 
 
 end
