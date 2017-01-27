@@ -1,6 +1,4 @@
-##LastName, FirstName, FavoriteColor, DateOfBirth
-
-require_relative '../database_writer'
+# require_relative 'database'
 
 class Person
   attr_reader :first_name, :last_name, :favorite_color, :birth_date
@@ -10,6 +8,14 @@ class Person
     @last_name = args["LastName"]
     @favorite_color = args["FavoriteColor"]
     @birth_date = args["DateOfBirth"]
+  end
+
+  def to_hash
+    hash = {}
+    self.instance_variables.each do |variable|
+      hash[variable.to_s.delete("@")] = self.instance_variable_get(variable)
+    end
+    hash
   end
 
   def self.all
@@ -34,8 +40,8 @@ class Person
     end
   end
 
-  def save
-    test = DatabaseWriter.write(self)
+  def save(database_object)
+    database_object.add(self)
   end
 
 end
@@ -43,15 +49,24 @@ end
 
 laura_args = {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> '2017-01-23' }
 laura = Person.new(laura_args)
-josh_args = { "FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> '2017-01-19' }
-josh = Person.new(josh_args)
-donna_args = { "FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> '2016-02-25' }
-donna =  Person.new(donna_args)
+p laura.to_hash
+# hash = {}
+# laura.instance_variables.each {|var| hash[var.to_s.delete("@")] = laura.instance_variable_get(var) }
+# p hash
+# p hash # => {"name"=>"book", "price"=>15.95}
+# test = {:first_name => laura.first_name, :last_name=>laura.last_name}
 
-p Person.all
-p Person.sort_by_color
-p Person.sort_by_birthdate
-p Person.sort_by_surname
+# p test
+# # josh_args = { "FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> '2017-01-19' }
+# # josh = Person.new(josh_args)
+# # donna_args = { "FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> '2016-02-25' }
+# # donna =  Person.new(donna_args)
+# # database = Database.new
+
+# p Person.all.to_json
+# # p Person.sort_by_color
+# # p Person.sort_by_birthdate
+# # p Person.sort_by_surname
 
 
 
