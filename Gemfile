@@ -4,3 +4,4 @@ gem "rspec", "~> 3.2"
 gem 'grape'
 gem 'rake'
 gem 'sinatra'
+gem 'shotgun'
