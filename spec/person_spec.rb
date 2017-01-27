@@ -29,17 +29,28 @@ describe Person do
     end
   end
 
+
   context 'it returns all instances of the Person class' do
 
-  	 it 'returns laura, josh and donna in array' do
-  	 	expect(Person.all).to include(laura, donna, josh)
-  	 end
+    it 'converts Person instances to a hash' do
+      expect(laura.to_hash).to eq({"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"cerulean", "birth_date"=>"2017-01-23"})
+    end
+
+  	 # it 'returns laura, josh and donna in array' do
+    #   people = []
+    #   Person.all.each do |person|
+    #     p person
+    #   people << {"FirstName"=> person.first_name, "LastName"=> person.last_name, "FavoriteColor"=> person.favorite_color, "DateOfBirth"=> person.birth_date }
+  	 # 	end
+    #   expect(people).to contain_exactly({"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"})
+
+  	 # end
 
   end
 
   context 'it sorts by desired attribute' do
     it 'sorts by favorite color descending, then by last name ascending' do
-    	expect(Person.sort_by_color).to eq([josh, laura, donna])
+    	expect(Person.sort_by_color).to contain_exactly(josh, laura, donna)
     end
 
     it 'sorts by birth date ascending' do
