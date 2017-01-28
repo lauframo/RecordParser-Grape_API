@@ -1,6 +1,5 @@
 require_relative "../spec_helper"
 
-
 describe Person do
   let(:laura_args) { {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> '2017-01-23' } }
   let(:laura) { Person.new(laura_args) }
@@ -34,31 +33,22 @@ describe Person do
     end
 
   	 it 'returns laura, josh and donna in array' do
-      people = []
-      Person.all.each {|person| people << person.to_hash }
-      expect(people).to eq([{"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}])
-
+      expect(Person.hash_output(Person.all)).to eq([{"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}])
   	 end
 
   end
 
   context 'it sorts by desired attribute' do
     it 'sorts by favorite color descending, then by last name ascending' do
-      people_by_color = []
-      Person.sort_by_color.each {|person| people_by_color << person.to_hash }
-      expect(people_by_color).to eq([{"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}])
+      expect(Person.hash_output(Person.sort_by_color)).to eq([{"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}])
     end
 
     it 'sorts by birth date ascending' do
-      people_by_birthdate = []
-      Person.sort_by_birthdate.each {|person| people_by_birthdate << person.to_hash}
-    	expect(people_by_birthdate).to eq([{"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}, {"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}])
+    	expect(Person.hash_output(Person.sort_by_birthdate)).to eq([{"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}, {"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}])
     end
 
     it 'sorts by last name descending' do
-    	people_by_surname = []
-      Person.sort_by_surname.each {|person| people_by_surname << person.to_hash}
-      expect(people_by_surname).to eq([{"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}, {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}])
+      expect(Person.hash_output(Person.sort_by_surname)).to eq([{"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}, {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}])
     end
   end
 
@@ -66,7 +56,6 @@ describe Person do
     it 'takes an instances and saves it to database' do
        expected_database = File.read('records.csv')
        generated_database = File.read('database.csv')
-
        expect(generated_database) == expected_database
     end
 
