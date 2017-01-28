@@ -38,7 +38,7 @@ class People < Grape::API
     { records: @collection}
   end
 
-  get :name do
+  get :surname do
     @collection = []
     @people =  Person.sort_by_surname.each { |person| @collection << person.to_hash}
     { records: @collection}
