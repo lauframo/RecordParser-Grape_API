@@ -20,6 +20,11 @@ module RecordParser
     output
   end
 
+  def self.parse_string(string)
+    output = []
+
+  end
+
 end
 
 
