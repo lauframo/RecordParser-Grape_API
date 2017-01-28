@@ -35,9 +35,9 @@ describe RecordParser do
 
   context 'it run save method on each person object' do
     it 'save each Person instance to database' do
-      expected_database = File.read('records.csv')
+      expected_database = File.read('record_parser_expect.csv')
       generated_database = File.read('database.csv')
-
+      expect(generated_database) == expected_database
     end
   end
 
