@@ -2,12 +2,11 @@ require_relative "../spec_helper"
 
 
 describe RecordParser do
-  let (:data) { "LastName|FirstName|FavoriteColor|DateOfBirth"}
-  let (:result) { RecordParser.parse("records.csv") }
+  before(:suite) { Database.new }
+
   let (:pipe_file) { RecordParser.parse("records_pipe_delimited.csv") }
   let (:comma_file) { RecordParser.parse("records.csv") }
 
-  before(:suite) { Database.new }
 
   context 'should read in the CSV' do
      it 'parsed all pipe-delimited records' do
@@ -33,13 +32,13 @@ describe RecordParser do
     end
   end
 
-  context 'it run save method on each person object' do
-    it 'save each Person instance to database' do
-      expected_database = File.read('record_parser_expect.csv')
-      generated_database = File.read('database.csv')
-      expect(generated_database) == expected_database
-    end
-  end
+  # context 'it run save method on each person object' do
+  #   it 'save each Person instance to database' do
+  #     expected_database = File.read('record_parser_expect.csv')
+  #     generated_database = File.read('database.csv')
+  #     expect(generated_database) == expected_database
+  #   end
+  # end
 
   after(:suite) { Database.new }
 
