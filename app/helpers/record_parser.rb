@@ -1,5 +1,5 @@
 require 'csv'
-require_relative 'person'
+require_relative '../models/person'
 module RecordParser
 
   def self.parse(filename)
@@ -23,5 +23,6 @@ module RecordParser
 end
 
 
+# p RecordParser.parse('database.csv')
 # p RecordParser.parse("records.csv")
 # p RecordParser.parse("records_pipe_delimited.csv")

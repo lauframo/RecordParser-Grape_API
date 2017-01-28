@@ -2,7 +2,7 @@ require_relative '../record_parser'
 
 describe RecordParser do
   let (:data) { "LastName|FirstName|FavoriteColor|DateOfBirth"}
-  let (:result) { "LastName|FirstName|FavoriteColor|DateOfBirth" }
+  let (:result) { RecordParser.parse("records.csv") }
   let (:pipe_file) { RecordParser.parse("records_pipe_delimited.csv") }
   let (:comma_file) { RecordParser.parse("records.csv") }
 
@@ -30,11 +30,11 @@ describe RecordParser do
     end
 
     it 'converted each pipe-delimited record to an instance of a Person class' do
-      expect(pipe_file.first.class).to eq Person
+      expect(pipe_file.first.kind_of?(Person)).to eq true
     end
 
      it 'converted each comma-delimited record to an instance of a Person class' do
-      expect(comma_file.first.class).to eq Person
+      expect(comma_file.first.kind_of?(Person)).to eq true
     end
   end
 
