@@ -1,4 +1,5 @@
 # require_relative 'database'
+require 'json'
 
 class Person
   attr_reader :first_name, :last_name, :favorite_color, :birth_date
@@ -23,9 +24,12 @@ class Person
   end
 
   def self.sort_by_color
-    self.all.sort do |a, b|
+    array = []
+    collection = self.all.sort do |a, b|
       [b.favorite_color.downcase, a.last_name.downcase] <=> [a.favorite_color.downcase, b.favorite_color.downcase]
     end
+    collection.each { |instance| array << instance.to_hash }
+    array
   end
 
   def self.sort_by_birthdate
@@ -40,6 +44,7 @@ class Person
     end
   end
 
+
   def save(database_object)
     database_object.add(self)
   end
@@ -47,8 +52,8 @@ class Person
 end
 
 
-# laura_args = {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> '2017-01-23' }
-# laura = Person.new(laura_args)
+laura_args = {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> '2017-01-23' }
+laura = Person.new(laura_args)
 # # p laura.to_hash
 # # hash = {}
 # # laura.instance_variables.each {|var| hash[var.to_s.delete("@")] = laura.instance_variable_get(var) }
@@ -57,8 +62,9 @@ end
 # # test = {:first_name => laura.first_name, :last_name=>laura.last_name}
 
 # # p test
-# josh_args = { "FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> '2017-01-19' }
-# josh = Person.new(josh_args)
+josh_args = { "FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> '2017-01-19' }
+josh = Person.new(josh_args)
+# p josh.to_json
 # # p josh.to_hash
 # donna_args = { "FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> '2016-02-25' }
 # donna =  Person.new(donna_args)
@@ -67,9 +73,10 @@ end
 # people = []
 # Person.sort_by_surname.each {|person| people << person.to_hash }
 # p people
-# # # p Person.sort_by_color
+p Person.sort_by_color
 # # # p Person.sort_by_birthdate
 # # # p Person.sort_by_surname
+
 
 
 
