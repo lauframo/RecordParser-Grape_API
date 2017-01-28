@@ -1,4 +1,5 @@
-require_relative '../record_parser'
+require_relative "../spec_helper"
+
 
 describe RecordParser do
   let (:data) { "LastName|FirstName|FavoriteColor|DateOfBirth"}
