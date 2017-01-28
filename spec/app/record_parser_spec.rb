@@ -7,27 +7,22 @@ describe RecordParser do
   let (:pipe_file) { RecordParser.parse("records_pipe_delimited.csv") }
   let (:comma_file) { RecordParser.parse("records.csv") }
 
+  before(:suite) { Database.new }
+
   context 'should read in the CSV' do
-    it 'should parse file content and return a result' do
-      expect(File.to receive(:open).with("filename")).to eq result
-    end
-  end
-
-
-  context 'it parses all records' do
      it 'parsed all pipe-delimited records' do
-      expect(pipe_file.length).to eq 2
+      expect(pipe_file.length).to eq 3
     end
 
     it 'parsed all comma-delimited records' do
-      expect(comma_file.length).to eq 2
+      expect(comma_file.length).to eq 3
     end
   end
 
   context 'converted to Person class instances' do
 
     it 'created Person objects for each row' do
-      expect(Person.count).to eq 2
+      expect(Person.all.count).to eq 6
     end
 
     it 'converted each pipe-delimited record to an instance of a Person class' do
@@ -38,6 +33,8 @@ describe RecordParser do
       expect(comma_file.first.kind_of?(Person)).to eq true
     end
   end
+
+  after(:suite) { Database.new }
 
 
 end
