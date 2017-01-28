@@ -20,7 +20,6 @@ describe RecordParser do
   end
 
   context 'converted to Person class instances' do
-
     it 'created Person objects for each row' do
       expect(Person.all.count).to eq 6
     end
@@ -31,6 +30,14 @@ describe RecordParser do
 
      it 'converted each comma-delimited record to an instance of a Person class' do
       expect(comma_file.first.kind_of?(Person)).to eq true
+    end
+  end
+
+  context 'it run save method on each person object' do
+    it 'save each Person instance to database' do
+      expected_database = File.read('records.csv')
+      generated_database = File.read('database.csv')
+
     end
   end
 
