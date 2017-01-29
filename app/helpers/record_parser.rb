@@ -2,7 +2,7 @@ require 'csv'
 require_relative '../models/person'
 module RecordParser
 
-  def self.parse(filename)
+  def self.parse_file(filename)
     output = []
     CSV.open(filename, 'r') do |csv|
       if csv.first[0].include? "|"
@@ -18,6 +18,11 @@ module RecordParser
       end
     end
     output
+  end
+
+  def self.parse_string(string)
+    output = []
+
   end
 
 end
