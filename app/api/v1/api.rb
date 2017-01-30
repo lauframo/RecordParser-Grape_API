@@ -1,3 +1,4 @@
+  require 'grape'
 module WestWing
 	class API < Grape::API
 	  version 'v1', using: :path
