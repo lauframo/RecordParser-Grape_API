@@ -1,3 +1,5 @@
+
+
 require 'csv'
 require_relative '../models/person'
 module RecordParser
@@ -22,7 +24,18 @@ module RecordParser
 
   def self.parse_string(string)
     output = []
-
+    if string.include? "|"
+      string.prepend("LastName|FirstName|FavoriteColor|DateOfBirth\n")
+      io_object = StringIO.new(string)
+      csv_object = CSV.new(io_object, :headers => true, :col_sep => "|") 
+    else
+      string.prepend("LastName,FirstName,FavoriteColor,DateOfBirth\n")
+      io_object = StringIO.new(string) 
+      csv_object = CSV.new(io_object, :headers => true)
+    end
+    collection = csv_object.to_a.map {|row| row.to_hash if row.length > 1 }
+    collection.each {|record| output << Person.new(record) if record != nil}
+    output
   end
 
 end
@@ -31,3 +44,8 @@ end
 # p RecordParser.parse('database.csv')
 # p RecordParser.parse("records.csv")
 # p RecordParser.parse("records_pipe_delimited.csv")
+
+pipe = "Wayne|John|Teal|2017-01-19\n\nGregg|Claudia Jean|Taupe|2017-01-22\n\nMoreno|Laura|Blue|2017-01-17\n"
+comma = "nWayne,John,Teal,2017-01-19\n\nGregg,Claudia Jean,Taupe,2017-01-22\n\nMoreno,Laura,Blue,2017-01-17\n"
+
+p RecordParser.parse_string(comma)
