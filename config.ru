@@ -1,3 +1,6 @@
 require './main'
 
-run Rack::Cascade.new [People, Web]
+RecordParser.parse_file('database.csv')
+
+
+run Rack::Cascade.new [WestWing::API, Web]
