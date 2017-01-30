@@ -1,5 +1,5 @@
 class Web < Sinatra::Base
   get '/' do
-    "This works"
+    "you are better off making an api request :)"
   end
 end
