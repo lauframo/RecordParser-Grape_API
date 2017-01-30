@@ -10,13 +10,8 @@ describe Database do
   let(:toby) { Person.new(toby_args)}
 
   context 'it initializes the database' do
-    # it 'raises an error if database object has not be initialized' do
-    #   database_file = File.read('database.csv')
-    #   expect(File.read('database.csv')).to raise_error
-    # end
-
     it 'creates a database file with only headers' do
-      database_file = File.read('test_database.csv')
+      database_file = File.read(database.file_name)
       string_representation = "LastName,FirstName,FavoriteColor,DateOfBirth\n"
 
       expect(database_file).to eq string_representation
