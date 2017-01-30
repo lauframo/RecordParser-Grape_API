@@ -6,8 +6,8 @@ module WestWing
 		def app
 			WestWing::API
 		end
+		before(:all) { RecordParser.parse_file('records.csv')}
 		let(:database) { Database.new('api_test.csv')}
-		let(:records) { RecordParser.parse_file('records.csv')}
 		let(:record_collection) { RecordParser.file_parser('testfile.csv')}
 		let(:browser) { Rack::Test::Session.new(Rack::MockSession.new(app)) }
 
@@ -59,7 +59,7 @@ module WestWing
 		    	expect(browser.last_response.status).to eq(200)
 		    end
 		    it 'returns data sorted by birthdate' do
-		    	expect(browser.last_response.body).to eq({"records":[{"first_name":"Laura","last_name":"Moreno","favorite_color":"Blue","birth_date":"2017-01-17"},{"first_name":"John","last_name":"Wayne","favorite_color":"Teal","birth_date":"2017-01-19"},{"first_name":"Claudia Jean","last_name":"Gregg","favorite_color":"Taupe","birth_date":"2017-01-22"}]})
+		    	expect(JSON.parse(browser.last_response.body)).to eq({"records"=>[{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"Blue","birth_date"=>"2017-01-17"},{"first_name"=>"John","last_name"=>"Wayne","favorite_color"=>"Teal","birth_date"=>"2017-01-19"},{"first_name"=>"Claudia Jean","last_name"=>"Gregg","favorite_color"=>"Taupe","birth_date"=>"2017-01-22"}]})
 		    end
 		end	
 
