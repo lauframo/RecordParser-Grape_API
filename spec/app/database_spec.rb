@@ -2,17 +2,27 @@ require_relative "../spec_helper"
 
 
 describe Database do
-  let(:database) { Database.new('test_database.csv') }
+  let(:database) { Database.new('./spec/test_files/db_example_1to7.csv') }
   # before(:all) {
 
   describe 'it initializes the database' do
-
     it 'creates a database file with only headers' do
+      expect(database.kind_of?(Database)).to eq true
+    end
+
+    it 'enters or updates content with just headers' do
+      database.refresh
       database_file = File.read(database.file_name)
       string_representation = "LastName,FirstName,FavoriteColor,DateOfBirth\n"
-
       expect(database_file).to eq string_representation
     end
+
+    it 'allows you to load an existing database file' do
+      database = Database.new('./spec/test_files/db_example_3.csv')
+      database.load
+      database_file = File.read(database.file_name)
+      expect(database_file.lines.count).to eq 3
+  end
   end
 
   describe 'adds objects to the database' do
@@ -27,25 +37,34 @@ describe Database do
     end
 
     it 'adds a Person object as a new row in database file' do
-      database = Database.new('test_database.csv')
+      database = Database.new('./spec/test_files/db_example_1to7.csv')
       database.add(toby)
-      database_file = File.read('test_database.csv')
+      database_file = File.read('./spec/test_files/db_example_1to7.csv')
       expected_string = "LastName,FirstName,FavoriteColor,DateOfBirth\nZiegler,Toby,magenta,1985-10-15\n"
       expect(database_file).to eq expected_string
     end
 
-    it 'appends new records to the end of the file' do
-      database = Database.new('test_database.csv')
+    it 'appends new records to the end of a new file' do
+      database = Database.new('./spec/test_files/db_example_1to7.csv')
+      database.refresh
       database.add(jed)
-      database_file = File.read('test_database.csv')
+      database_file = File.read('./spec/test_files/db_example_1to7.csv')
       expect(database_file.lines.count).to eq 2
 
       database.add(toby)
-      database_file = File.read('test_database.csv')
+      database_file = File.read('./spec/test_files/db_example_1to7.csv')
       expect(database_file.lines.count).to eq 3
+    end
+
+    it 'appends new records to the end of a loaded file' do
+      database = Database.new('./spec/test_files/db_example_1to7.csv')
+      database.load
+      database.add(toby)
+      database_file = File.read('./spec/test_files/db_example_1to7.csv')
+      expect(database_file.lines.count).to eq 4
     end
 
   end
 
-  # after(:all) { Database.new }
+
 end

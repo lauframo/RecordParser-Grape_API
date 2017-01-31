@@ -4,8 +4,8 @@ require_relative "../spec_helper"
 describe RecordParser do
   # before(:suite) { Database.new }
 
-  let (:pipe_file) { RecordParser.parse_file("records_pipe_delimited.csv") }
-  let (:comma_file) { RecordParser.parse_file("records_comma_delimited.csv") }
+  let (:pipe_file) { RecordParser.parse_file("./spec/test_files/records_pipe_delimited.csv") }
+  let (:comma_file) { RecordParser.parse_file("./spec/test_files/records_comma_delimited.csv") }
   let (:parsed_comma_string) {RecordParser.parse_string(comma_string)}
 
   context 'should read in the CSV' do

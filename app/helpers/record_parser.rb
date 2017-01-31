@@ -42,10 +42,3 @@ module RecordParser
   end
 
 end
-
-
-# p RecordParser.parse('database.csv')
-# p RecordParser.parse("records.csv")
-# p RecordParser.parse("records_pipe_delimited.csv")
-
-# pipe = "Wayne|John|Teal|2017-01-19\n\nGregg|Claudia Jean|Taupe|2017-01-22\n\nrs

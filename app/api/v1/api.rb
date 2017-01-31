@@ -7,12 +7,10 @@ module WestWing
     version 'v1', using: :path
     format :json
 
-    DATABASE = Database.new('database.csv')
+    DATABASE = Database.new('./db/database.csv')
+    DATABASE.load
+    RecordParser.parse_file('./db/database.csv')
 
-    # For Rspec Testing, please make sure to comment out the line below before running the suite 
-    # @record = RecordParser.parse_file('api_records.csv')
-    # @record.each { |record| record.save(DATABASE) }
-  # p Person.all
     
   params do
     requires :LastName, type: String

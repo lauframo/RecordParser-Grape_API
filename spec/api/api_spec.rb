@@ -7,7 +7,7 @@ module WestWing
 			WestWing::API
 		end
 		# before(:suite) { RecordParser.parse_file('api_records.csv')}
-		let(:database) { Database.new('api_test.csv')}
+		let(:database) { Database.new('./spec/test_files/api_test.csv')}
 		let(:browser) { Rack::Test::Session.new(Rack::MockSession.new(app)) }
 
 		describe 'POST /v1' do
