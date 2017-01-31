@@ -43,7 +43,8 @@ GEM
       rack (>= 0.4)
     rack-protection (1.5.3)
       rack
-    rake (12.0.0)
+    rack-test (0.6.3)
+      rack (>= 1.0)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -79,10 +80,10 @@ PLATFORMS
 
 DEPENDENCIES
   grape
-  rake
-  rspec (~> 3.2)
+  rack-test
+  rspec
   shotgun
   sinatra
 
 BUNDLED WITH
-   1.10.6
+   1.13.6
