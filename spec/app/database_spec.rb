@@ -2,7 +2,7 @@ require_relative "../spec_helper"
 
 
 describe Database do
-  let(:database) { Database.new('test_database.csv') }
+  let(:database) { Database.new('./spec/test_files/db_example_1to7.csv') }
   # before(:all) {
 
   describe 'it initializes the database' do
@@ -18,7 +18,7 @@ describe Database do
     end
 
     it 'allows you to load an existing database file' do
-      database = Database.new('test.csv')
+      database = Database.new('./spec/test_files/db_example_3.csv')
       database.load
       database_file = File.read(database.file_name)
       expect(database_file.lines.count).to eq 3
@@ -37,30 +37,30 @@ describe Database do
     end
 
     it 'adds a Person object as a new row in database file' do
-      database = Database.new('test_database.csv')
+      database = Database.new('./spec/test_files/db_example_1to7.csv')
       database.add(toby)
-      database_file = File.read('test_database.csv')
+      database_file = File.read('./spec/test_files/db_example_1to7.csv')
       expected_string = "LastName,FirstName,FavoriteColor,DateOfBirth\nZiegler,Toby,magenta,1985-10-15\n"
       expect(database_file).to eq expected_string
     end
 
     it 'appends new records to the end of a new file' do
-      database = Database.new('test_database.csv')
+      database = Database.new('./spec/test_files/db_example_1to7.csv')
       database.refresh
       database.add(jed)
-      database_file = File.read('test_database.csv')
+      database_file = File.read('./spec/test_files/db_example_1to7.csv')
       expect(database_file.lines.count).to eq 2
 
       database.add(toby)
-      database_file = File.read('test_database.csv')
+      database_file = File.read('./spec/test_files/db_example_1to7.csv')
       expect(database_file.lines.count).to eq 3
     end
 
     it 'appends new records to the end of a loaded file' do
-      database = Database.new('test_database.csv')
+      database = Database.new('./spec/test_files/db_example_1to7.csv')
       database.load
       database.add(toby)
-      database_file = File.read('test_database.csv')
+      database_file = File.read('./spec/test_files/db_example_1to7.csv')
       expect(database_file.lines.count).to eq 4
     end
 

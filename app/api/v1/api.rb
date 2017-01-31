@@ -7,9 +7,9 @@ module WestWing
     version 'v1', using: :path
     format :json
 
-    DATABASE = Database.new('database.csv')
+    DATABASE = Database.new('./db/database.csv')
     DATABASE.load
-    RecordParser.parse_file('database.csv')
+    RecordParser.parse_file('./db/database.csv')
 
     
   params do
