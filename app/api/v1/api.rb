@@ -8,6 +8,9 @@ module WestWing
     format :json
 
     DATABASE = Database.new('database.csv')
+    DATABASE.load
+    RecordParser.parse_file('database.csv')
+
 
     # For Rspec Testing, please make sure to comment out the line below before running the suite 
     # @record = RecordParser.parse_file('api_records.csv')
