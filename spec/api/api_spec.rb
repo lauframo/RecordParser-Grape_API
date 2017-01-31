@@ -6,7 +6,6 @@ module WestWing
 		def app
 			WestWing::API
 		end
-		# before(:all) { RecordParser.parse_file('api_records.csv')}
 		let(:database) { Database.new('api_test.csv')}
 		let(:browser) { Rack::Test::Session.new(Rack::MockSession.new(app)) }
 
@@ -48,7 +47,6 @@ module WestWing
 		    end
 
 		    it 'returns data sorted by color descending, then by surname' do
-		    	# RecordParser.parse_file('api_records.csv')
 		    	expect(JSON.parse(browser.last_response.body)).to eq({"records"=>[{"first_name"=>"John","last_name"=>"Wayne","favorite_color"=>"teal","birth_date"=>"2017-01-19"},{"first_name"=>"Claudia Jean","last_name"=>"Gregg","favorite_color"=>"taupe","birth_date"=>"2017-01-22"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"}]})
 		    end
 		end
