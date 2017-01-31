@@ -6,13 +6,23 @@ describe Database do
   # before(:all) {
 
   describe 'it initializes the database' do
-
     it 'creates a database file with only headers' do
+      expect(database.kind_of?(Database)).to eq true
+    end
+
+    it 'enters or updates content with just headers' do
+      database.refresh
       database_file = File.read(database.file_name)
       string_representation = "LastName,FirstName,FavoriteColor,DateOfBirth\n"
-
       expect(database_file).to eq string_representation
     end
+
+    it 'allows you to load an existing database file' do
+      database = Database.new('test.csv')
+      database.load
+      database_file = File.read('test_database.csv')
+      expect(database_file.lines.count).to eq 3
+  end
   end
 
   describe 'adds objects to the database' do
@@ -44,7 +54,6 @@ describe Database do
       database_file = File.read('test_database.csv')
       expect(database_file.lines.count).to eq 3
     end
-
   end
 
   # after(:all) { Database.new }
