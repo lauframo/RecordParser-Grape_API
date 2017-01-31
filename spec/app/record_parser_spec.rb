@@ -42,17 +42,10 @@ describe RecordParser do
       expect(parsed_pipe_string.first.kind_of?(Person)).to eq true
     end
      it 'parses a pipe-delimited string into a Person object' do
-      expect(parsed_comma_string.first.kind_of?(Person)).to eq true
+      expect(parsed_commae_string.first.kind_of?(Person)).to eq true
     end
   end
 
-  # context 'it run save method on each person object' do
-  #   it 'save each Person instance to database' do
-  #     expected_database = File.read('record_parser_expect.csv')
-  #     generated_database = File.read('database.csv')
-  #     expect(generated_database) == expected_database
-  #   end
-  # end
 
   after(:suite) { Database.new }
 
