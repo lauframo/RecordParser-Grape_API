@@ -14,8 +14,8 @@ module WestWing
 			let(:record) {{ "LastName" => "Moreno", "FirstName" => "Laura", "FavoriteColor" => "blue", "DateOfBirth" => "2010-11-08"}}
 
 			context 'with valid data' do
-				let(:record_collection) { RecordParser.file_parser('testfile.csv')}
 				it 'returns a 201 status code' do
+					# let(:record_collection) { RecordParser.file_parser('testfile.csv')}
 				 	browser.post '/v1', record
 					expect(browser.last_response.status).to eq(201)
 				end
@@ -24,20 +24,20 @@ module WestWing
 					browser.post '/v1', record
 					expect(JSON.parse(browser.last_response.body)).to eq({"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2010-11-08"})
 				end
-
-				it 'add the record as a row in the database' do
-					database = File.read('database_file.csv')
-					expect(database.last).to eq "Moreno,Laura,Blue,2010-11-08\n"
-				end
 			end
 		
 			context 'with invalid data' do 
-				record_params = { "FirstName" => "Laura", "FavoriteColor" => "blue", "DateOfBirth" => "2010-11-08"}
-				before(:each) { browser.post 'v1/records', record_params }
+				let(:record_params) { { "FirstName" => "Laura", "FavoriteColor" => "blue", "DateOfBirth" => "2010-11-08"} }
+				
+
+				it 'returns a 400 status code' do
+				 	browser.post '/v1', record_params
+					expect(browser.last_response.status).to eq(400)
+				end
 
 				it 'returns an error' do
-					response = JSON.parse(last_response.body)
-					expect(response['message']).to eq("Last Name can't be blank")
+					browser.post '/v1', record_params
+					expect(JSON.parse(browser.last_response.body)).to eq({"error":"LastName is missing"})
 				end
 			end
 		end
