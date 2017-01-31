@@ -57,14 +57,14 @@ describe Database do
     end
 
     it 'appends new records to the end of a loaded file' do
-      database = Database.new('test.csv')
+      database = Database.new('test_database.csv')
       database.load
       database.add(toby)
-      database_file = File.read('test.csv')
+      database_file = File.read('test_database.csv')
       expect(database_file.lines.count).to eq 4
     end
 
   end
 
-  # after(:all) { Database.new }
+
 end
