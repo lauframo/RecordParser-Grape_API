@@ -2,10 +2,11 @@ require_relative "../spec_helper"
 
 
 describe Database do
+  let(:database) { Database.new('test_database.csv') }
   # before(:all) {
 
   describe 'it initializes the database' do
-    let(:database) { Database.new('test_database.csv') }
+
     it 'creates a database file with only headers' do
       database_file = File.read(database.file_name)
       string_representation = "LastName,FirstName,FavoriteColor,DateOfBirth\n"
@@ -15,11 +16,11 @@ describe Database do
   end
 
   describe 'adds objects to the database' do
-    let(:jed_args) { {"FirstName"=> "Jed", "LastName"=> "Barlett", "FavoriteColor"=> "navy", "DateOfBirth"=> '2015-10-20' } }
-    let(:jed) { Person.new(jed_args)}
-    let(:toby_args) { {"FirstName"=> "Toby", "LastName"=> "Ziegler", "FavoriteColor"=> "magenta", "DateOfBirth"=> '1985-10-15' } }
-    let(:toby) { Person.new(toby_args)}
-    
+    jed_args = {"FirstName"=> "Jed", "LastName"=> "Barlett", "FavoriteColor"=> "navy", "DateOfBirth"=> '2015-10-20'}
+    jed = Person.new(jed_args)
+    toby_args = {"FirstName"=> "Toby", "LastName"=> "Ziegler", "FavoriteColor"=> "magenta", "DateOfBirth"=> '1985-10-15' }
+    toby = Person.new(toby_args)
+
     it 'raises an error if a non-Person object is passed to be added' do
       item = "Ziegler,Toby,magenta,1985-10-15"
       expect{ database.add(item) }.to raise_error(Database::NoPersonError)

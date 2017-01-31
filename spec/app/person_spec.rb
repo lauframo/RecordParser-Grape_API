@@ -29,10 +29,6 @@ describe Person do
 
 
 	describe 'it returns all instances of the Person class' do
-		let!(:laura_args) { {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> '2017-01-23' } }
-		let!(:laura) { Person.new(laura_args) }
-		let!(:donna_args) { { "FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> '2016-02-25' } }
-		let!(:donna) { Person.new(donna_args) }
 
 		it 'returns laura, josh and donna in array' do
 			expect(Person.all).to eq([{"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}])
