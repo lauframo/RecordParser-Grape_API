@@ -5,3 +5,4 @@ require './dependencies'
 end
 
 DATABASE = Database.new('database.csv')
+
