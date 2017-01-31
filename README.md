@@ -41,4 +41,5 @@ curl --data "LastName=Zoey&FirstName=Barlett&FavoriteColor=lilacn&DateOfBirth=19
 
 ## Take Aways
 **RSpec green is my favorite color** Testing your entire code is a wise and tedious endeavor. Had tests not been made from the beginning, changes I had to make during the implementation of the API would have been painful if not impossible. With that said, setting up the entire suite provided for moments of euphoria and panic. While this is certainly not my first interaction with Rspec, it is the most extensive test I've done solo and as a result I got acquainted with nuances of the tool I wasn't previously aware of. So again, this was a cool challenge. 
+
 **Grape is so cool!**I am aware this is a pretty simple API, but I was delighted with how straightforward it was. Now that I am familiar with it, I'd like to look into authentication.
