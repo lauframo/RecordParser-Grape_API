@@ -1,14 +1,16 @@
 require_relative '../../helpers/record_parser.rb'
-
-# p Person.all
+require_relative '../../models/database.rb'
 require 'grape'
 
 module WestWing
   class API < Grape::API
     version 'v1', using: :path
     format :json
-    
-    @record = RecordParser.parse_file('records.csv')
+
+    DATABASE = Database.new('database.csv')
+
+    # For Rspec Testing, please make sure to comment out the line below before running the suite 
+    # @record = RecordParser.parse_file('api_records.csv')
     # @record.each { |record| record.save(DATABASE) }
   # p Person.all
     
@@ -24,6 +26,7 @@ module WestWing
   post do
     record = Person.new(params)
     record.save(DATABASE)
+    record.to_hash
   end
 
     get :color do
