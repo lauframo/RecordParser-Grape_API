@@ -43,8 +43,8 @@ describe RecordParser do
     it 'parses a pipe-delimited string into a Person object' do
       expect(parsed_pipe_string.first.kind_of?(Person)).to eq true
     end
-     it 'parses a pipe-delimited string into a Person object' do
-      expect(parsed_commae_string.first.kind_of?(Person)).to eq true
+     it 'parses a comma-delimited string into a Person object' do
+      expect(parsed_comma_string.first.kind_of?(Person)).to eq true
     end
   end
 
