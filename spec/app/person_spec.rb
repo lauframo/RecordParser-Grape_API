@@ -36,6 +36,15 @@ describe Person do
 
 	describe 'it sorts by desired attribute' do
     	it 'sorts by favorite color descending, then by last name ascending' do
-      	expect(Person.hash_output(Person.sort_by_color)).to eq([{"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}])
+      		expect(RecordParser.hash_output(Person.sort_by_color)).to eq([{"first_name"=>"John", "last_name"=>"Wayne", "favorite_color"=>"teal", "birth_date"=>"2017-01-19"},{"first_name"=>"Claudia Jean", "last_name"=>"Gregg", "favorite_color"=>"taupe", "birth_date"=>"2017-01-22"},{"first_name"=>"Josh", "last_name"=>"Lyman", "favorite_color"=>"tan", "birth_date"=>"2017-01-19"},{"first_name"=>"Jed", "last_name"=>"Barlett", "favorite_color"=>"navy", "birth_date"=>"2015-10-20"},{"first_name"=>"Toby", "last_name"=>"Ziegler", "favorite_color"=>"magenta", "birth_date"=>"1985-10-15"},{"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2017-01-17"},{"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2017-01-17"},{"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2017-01-17"}])
     	end
-	end
+
+    	it 'sorts by birth date ascending' do
+      		expect(RecordParser.hash_output(Person.sort_by_birthdate)).to eq([{"first_name"=>"Toby", "last_name"=>"Ziegler", "favorite_color"=>"magenta", "birth_date"=>"1985-10-15"}, {"first_name"=>"Jed", "last_name"=>"Barlett", "favorite_color"=>"navy", "birth_date"=>"2015-10-20"}, {"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2017-01-17"}, {"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2017-01-17"}, {"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2017-01-17"}, {"first_name"=>"Josh", "last_name"=>"Lyman", "favorite_color"=>"tan", "birth_date"=>"2017-01-19"}, {"first_name"=>"John", "last_name"=>"Wayne", "favorite_color"=>"teal", "birth_date"=>"2017-01-19"}, {"first_name"=>"Claudia Jean", "last_name"=>"Gregg", "favorite_color"=>"taupe", "birth_date"=>"2017-01-22"}])
+    	end
+
+		it 'sorts by last name descending' do
+			expect(RecordParser.hash_output(Person.sort_by_surname)).to eq([{"first_name"=>"Toby", "last_name"=>"Ziegler", "favorite_color"=>"magenta", "birth_date"=>"1985-10-15"}, {"first_name"=>"John", "last_name"=>"Wayne", "favorite_color"=>"teal", "birth_date"=>"2017-01-19"}, {"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2017-01-17"}, {"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2017-01-17"}, {"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2017-01-17"}, {"first_name"=>"Josh", "last_name"=>"Lyman", "favorite_color"=>"tan", "birth_date"=>"2017-01-19"}, {"first_name"=>"Claudia Jean", "last_name"=>"Gregg", "favorite_color"=>"taupe", "birth_date"=>"2017-01-22"}, {"first_name"=>"Jed", "last_name"=>"Barlett", "favorite_color"=>"navy", "birth_date"=>"2015-10-20"}])
+    	end
+  	end
+end
