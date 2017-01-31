@@ -5,13 +5,13 @@ class Database
   COLUMN_HEADERS = ["LastName", "FirstName", "FavoriteColor", "DateOfBirth"]
     # FILE_NAME = "database.csv"
   attr_reader :file_name
+  attr_accessor :content
 
   class NoPersonError < StandardError
   end
 
   def initialize(filename)
     @file_name = filename
-    @database = CSV.open(filename, "wb") { |csv| csv << COLUMN_HEADERS}
   end
 
   def add(record)
@@ -19,6 +19,14 @@ class Database
     CSV.open(self.file_name, "a+") do |csv|
       csv << [ record.last_name, record.first_name, record.favorite_color, record.birth_date ]
     end
+  end
+
+  def refresh
+    @content = CSV.open(self.file_name, "wb") { |csv| csv << COLUMN_HEADERS}
+  end
+
+  def load
+    @content = CSV.open(self.file_name, "wb")
   end
 end
 
