@@ -7,18 +7,17 @@ This was a very fun and interesting challenge. It consists of parsing comma-deli
 ## How
 This project is currently supported by an existing database in CSV format and it is loaded with the main characters of West Wing (Season 1- Season 4). You can interact with the API by:
 
-1. Clone repo
+* Clone repo
 
-2. Install all gems
+* Install all gems
 ``` bash
 $ bundle install
 ```
-3. Fire up your local server
+* Fire up your local server
 ```bash
 $ bundle exec shotgun
 ```
-
-4. Start requesting!
+* Start requesting!
 
 For records by color descending:
 ```bash
