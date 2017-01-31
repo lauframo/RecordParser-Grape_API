@@ -29,12 +29,13 @@ describe Person do
 
 
 	describe 'it returns all instances of the Person class' do
-
-		it 'returns laura, josh and donna in array' do
-			expect(Person.all).to eq([{"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}])
+		it 'returns correct number of total Person objects' do
+			expect(Person.all.length).to eq(8)
 		end
 	end
 
-
-
-end
+	describe 'it sorts by desired attribute' do
+    	it 'sorts by favorite color descending, then by last name ascending' do
+      	expect(Person.hash_output(Person.sort_by_color)).to eq([{"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}])
+    	end
+	end

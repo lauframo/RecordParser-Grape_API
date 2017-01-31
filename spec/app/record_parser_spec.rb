@@ -2,7 +2,7 @@ require_relative "../spec_helper"
 
 
 describe RecordParser do
-  before(:suite) { Database.new }
+  # before(:suite) { Database.new }
 
   let (:pipe_file) { RecordParser.parse_file("records_pipe_delimited.csv") }
   let (:comma_file) { RecordParser.parse_file("records_comma_delimited.csv") }
@@ -48,8 +48,16 @@ describe RecordParser do
     end
   end
 
+  it 'takes a collection of Person objects and returns an array of hashes' do
+    collection = Array.new.push(pipe_file[0], comma_file[1])
+    expect(RecordParser.hash_output(collection)).to eq([{"first_name"=>"Laura",
+        "last_name"=>"Moreno", "favorite_color"=>"Blue", "birth_date"=>"2017-01-17"}, {"first_name"=>"Tom", "last_name"=>"Cruise", "favorite_color"=>"Crimson",
+        "birth_date"=>"2016-02-28"}])
 
-  after(:suite) { Database.new }
+  end
+
+
+  # after(:suite) { Database.new }
 
 
 end
