@@ -6,5 +6,5 @@ gem 'shotgun'
 
 group :test do
 	gem "rspec"
-	gem "rack-test",  require: "rack/test"
+	gem "rack-test"
 end
