@@ -11,25 +11,22 @@ module WestWing
 		let(:browser) { Rack::Test::Session.new(Rack::MockSession.new(app)) }
 
 		describe 'POST /v1' do
-			let(:record) {{ "LastName" => "Moreno", "FirstName" => "Laura", "FavoriteColor" => "blue", "DateOfBirth" => "2010-11-08"}}
+			let(:record) {{ "LastName" => "Moreno", "FirstName" => "Laura", "FavoriteColor" => "blue", "DateOfBirth" => "2017-01-17"}}
 
 			context 'with valid data' do
 				it 'returns a 201 status code' do
-					# let(:record_collection) { RecordParser.file_parser('testfile.csv')}
 				 	browser.post '/v1', record
 					expect(browser.last_response.status).to eq(201)
 				end
 
 				it 'returns the created record' do
 					browser.post '/v1', record
-					expect(JSON.parse(browser.last_response.body)).to eq({"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2010-11-08"})
+					expect(JSON.parse(browser.last_response.body)).to eq({"first_name"=>"Laura", "last_name"=>"Moreno", "favorite_color"=>"blue", "birth_date"=>"2017-01-17"})
 				end
 			end
 		
 			context 'with invalid data' do 
 				let(:record_params) { { "FirstName" => "Laura", "FavoriteColor" => "blue", "DateOfBirth" => "2010-11-08"} }
-				
-
 				it 'returns a 400 status code' do
 				 	browser.post '/v1', record_params
 					expect(browser.last_response.status).to eq(400)
@@ -37,7 +34,7 @@ module WestWing
 
 				it 'returns an error' do
 					browser.post '/v1', record_params
-					expect(JSON.parse(browser.last_response.body)).to eq({"error":"LastName is missing"})
+					expect(JSON.parse(browser.last_response.body)).to eq({"error"=>"LastName is missing"})
 				end
 			end
 		end
@@ -51,7 +48,8 @@ module WestWing
 		    end
 
 		    it 'returns data sorted by color descending, then by surname' do
-		    	expect(JSON.parse(browser.last_response.body)).to eq({"records"=>[{"first_name"=>"John","last_name"=>"Wayne","favorite_color"=>"Teal","birth_date"=>"2017-01-19"},{"first_name"=>"Claudia Jean","last_name"=>"Gregg","favorite_color"=>"Taupe","birth_date"=>"2017-01-22"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"Blue","birth_date"=>"2017-01-17 "}]})
+		    	# RecordParser.parse_file('api_records.csv')
+		    	expect(JSON.parse(browser.last_response.body)).to eq({"records"=>[{"first_name"=>"John","last_name"=>"Wayne","favorite_color"=>"teal","birth_date"=>"2017-01-19"},{"first_name"=>"Claudia Jean","last_name"=>"Gregg","favorite_color"=>"taupe","birth_date"=>"2017-01-22"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"}]})
 		    end
 		end
 
@@ -61,7 +59,7 @@ module WestWing
 		    	expect(browser.last_response.status).to eq(200)
 		    end
 		    it 'returns data sorted by birthdate' do
-		    	expect(JSON.parse(browser.last_response.body)).to eq({"records"=>[{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"Blue","birth_date"=>"2017-01-17 "},{"first_name"=>"John","last_name"=>"Wayne","favorite_color"=>"Teal","birth_date"=>"2017-01-19"},{"first_name"=>"Claudia Jean","last_name"=>"Gregg","favorite_color"=>"Taupe","birth_date"=>"2017-01-22"}]})
+		    	expect(JSON.parse(browser.last_response.body)).to eq({"records"=>[{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"},{"first_name"=>"John","last_name"=>"Wayne","favorite_color"=>"teal","birth_date"=>"2017-01-19"},{"first_name"=>"Claudia Jean","last_name"=>"Gregg","favorite_color"=>"taupe","birth_date"=>"2017-01-22"}]})
 		    end
 		end	
 
@@ -71,7 +69,7 @@ module WestWing
 		    	expect(browser.last_response.status).to eq(200)
 		    end
 		    it 'returns data sorted by surname descending' do
-		    	expect(JSON.parse(browser.last_response.body)).to eq({"records"=>[{"first_name"=>"John","last_name"=>"Wayne","favorite_color"=>"Teal","birth_date"=>"2017-01-19"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"Blue","birth_date"=>"2017-01-17 "},{"first_name"=>"Claudia Jean","last_name"=>"Gregg","favorite_color"=>"Taupe","birth_date"=>"2017-01-22"}]})
+		    	expect(JSON.parse(browser.last_response.body)).to eq({"records"=>[{"first_name"=>"John","last_name"=>"Wayne","favorite_color"=>"teal","birth_date"=>"2017-01-19"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"},{"first_name"=>"Laura","last_name"=>"Moreno","favorite_color"=>"blue","birth_date"=>"2017-01-17"},{"first_name"=>"Claudia Jean","last_name"=>"Gregg","favorite_color"=>"taupe","birth_date"=>"2017-01-22"}]})
 		    end
 		end	
 
