@@ -5,7 +5,7 @@ describe RecordParser do
   before(:suite) { Database.new }
 
   let (:pipe_file) { RecordParser.parse_file("records_pipe_delimited.csv") }
-  let (:comma_file) { RecordParser.parse_file("records.csv") }
+  let (:comma_file) { RecordParser.parse_file("records_comma_delimited.csv") }
   let (:parsed_comma_string) {RecordParser.parse_string(comma_string)}
 
   context 'should read in the CSV' do
@@ -20,7 +20,9 @@ describe RecordParser do
 
   context 'converted to Person class instances' do
     it 'created Person objects for each row' do
-      expect(Person.all.count).to eq 6
+    	total_elements = comma_file + pipe_file
+    	person_collection = total_elements.select {|elem| elem.kind_of?(Person)}
+        expect(person_collection.length).to eq 6
     end
 
     it 'converted each pipe-delimited record to an instance of a Person class' do
