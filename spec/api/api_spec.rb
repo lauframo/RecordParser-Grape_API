@@ -6,6 +6,7 @@ module WestWing
 		def app
 			WestWing::API
 		end
+		# before(:suite) { RecordParser.parse_file('api_records.csv')}
 		let(:database) { Database.new('api_test.csv')}
 		let(:browser) { Rack::Test::Session.new(Rack::MockSession.new(app)) }
 
@@ -40,7 +41,6 @@ module WestWing
 
 
 		describe 'GET /v1/color' do
-			before(:all) { RecordParser.parse_file('api_records.csv')}
 			before(:each) { browser.get '/v1/color' }
 			it 'returns a 200 status code' do
 		    	expect(browser.last_response.status).to eq(200)
