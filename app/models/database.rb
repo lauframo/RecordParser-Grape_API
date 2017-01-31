@@ -1,21 +1,23 @@
 require 'csv'
-# require_relative 'per∏∏∏son'
 
 
 class Database
-    COLUMN_HEADERS = ["LastName", "FirstName", "FavoriteColor", "DateOfBirth"]
+  COLUMN_HEADERS = ["LastName", "FirstName", "FavoriteColor", "DateOfBirth"]
     # FILE_NAME = "database.csv"
-    attr_reader :file_name
+  attr_reader :file_name
+
+  class NoPersonError < StandardError
+  end
 
   def initialize(filename)
     @file_name = filename
     @database = CSV.open(filename, "wb") { |csv| csv << COLUMN_HEADERS}
   end
 
-  def add(person_object)
-    raise "Not an instance of Person class" if !person_object.kind_of?(Person)
+  def add(record)
+    raise NoPersonError, "Not an instance of Person class" unless record.kind_of?(Person)
     CSV.open(self.file_name, "a+") do |csv|
-      csv << [ person_object.last_name, person_object.first_name, person_object.favorite_color, person_object.birth_date ]
+      csv << [ record.last_name, record.first_name, record.favorite_color, record.birth_date ]
     end
   end
 end

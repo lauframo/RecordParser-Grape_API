@@ -35,6 +35,12 @@ module RecordParser
     output
   end
 
+  def self.hash_output(collection)
+    array = []
+    collection.each { |instance| array << instance.to_hash }
+    array
+  end
+
 end
 
 
