@@ -17,7 +17,9 @@ $ bundle install
 ```bash
 $ bundle exec shotgun
 ```
+
 4. Start requesting!
+
 For records by color descending:
 ```bash
 $ curl http://localhost:9393/v1/color
