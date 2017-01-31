@@ -3,8 +3,8 @@ require_relative "../spec_helper"
 describe Person do
 
 	describe 'it has readable attributes' do
-		let(:josh_args) { { "FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> '2017-01-19' } }
-		let(:josh) { Person.new(josh_args) } 
+		josh_args = { "FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> '2017-01-19' } 
+		josh = Person.new(josh_args)
 			
 	    it 'returns a first name' do
 	    	expect(josh.first_name).to eq "Josh"
@@ -21,15 +21,24 @@ describe Person do
     	it 'returns a date of birth' do
       		expect(josh.birth_date).to eq "2017-01-19"
 	    end
+
+    	it 'converts Person instances to a hash' do
+      		expect(josh.to_hash).to eq({"first_name"=>"Josh", "last_name"=>"Lyman", "favorite_color"=>"tan", "birth_date"=>"2017-01-19"})
+    	end
 	end
 
 
-    # it 'converts Person instances to a hash' do
-    #   expect(josh.to_hash).to eq({"first_name"=>"Josh", "last_name"=>"Lyman", "favorite_color"=>"tan", "birth_date"=>"2017-01-19"})
-    # end
+	describe 'it returns all instances of the Person class' do
+		let!(:laura_args) { {"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> '2017-01-23' } }
+		let!(:laura) { Person.new(laura_args) }
+		let!(:donna_args) { { "FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> '2016-02-25' } }
+		let!(:donna) { Person.new(donna_args) }
 
-    it 'returns laura, josh and donna in array' do
-      expect(Person.all).to eq([{"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}])
-  	end
+		it 'returns laura, josh and donna in array' do
+			expect(Person.all).to eq([{"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "cerulean", "DateOfBirth"=> "2017-01-23"}, {"FirstName"=> "Josh", "LastName"=> "Lyman", "FavoriteColor"=> "tan", "DateOfBirth"=> "2017-01-19"}, {"FirstName"=> "Donna", "LastName"=> "Moss", "FavoriteColor"=> "amber", "DateOfBirth"=> "2016-02-25"}])
+		end
+	end
+
+
 
 end
