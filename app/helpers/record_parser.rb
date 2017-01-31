@@ -1,9 +1,6 @@
-
-
 require 'csv'
-require_relative '../models/person'
-module RecordParser
 
+module RecordParser
   def self.parse_file(filename)
     output = []
     CSV.open(filename, 'r') do |csv|
@@ -45,7 +42,4 @@ end
 # p RecordParser.parse("records.csv")
 # p RecordParser.parse("records_pipe_delimited.csv")
 
-pipe = "Wayne|John|Teal|2017-01-19\n\nGregg|Claudia Jean|Taupe|2017-01-22\n\nMoreno|Laura|Blue|2017-01-17\n"
-comma = "nWayne,John,Teal,2017-01-19\n\nGregg,Claudia Jean,Taupe,2017-01-22\n\nMoreno,Laura,Blue,2017-01-17\n"
-
-p RecordParser.parse_string(comma)
+# pipe = "Wayne|John|Teal|2017-01-19\n\nGregg|Claudia Jean|Taupe|2017-01-22\n\nrs
