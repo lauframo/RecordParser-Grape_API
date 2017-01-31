@@ -1,18 +1,23 @@
+require_relative '../../helpers/record_parser.rb'
+
+# p Person.all
 require 'grape'
 
 module WestWing
   class API < Grape::API
     version 'v1', using: :path
     format :json
-
-    @laura= Person.new({"FirstName"=> "Laura", "LastName"=> "Moreno", "FavoriteColor"=> "green", "DateOfBirth"=> '2015-10-21' })
-    @person = Person.new({"FirstName"=> "Jed", "LastName"=> "Barlett", "FavoriteColor"=> "navy", "DateOfBirth"=> '2015-10-20' })
-
+    
+    @record = RecordParser.parse_file('records.csv')
+    # @record.each { |record| record.save(DATABASE) }
+  # p Person.all
+    
   params do
     requires :LastName, type: String
     requires :FirstName, type: String
     requires :FavoriteColor, type: String
     requires :DateOfBirth, type: String
+    optional :string_record, type: String
   end
 
 
@@ -30,7 +35,7 @@ module WestWing
     end
 
     get :surname do
-      { records: Person.hash_ouput(Person.sort_by_birthdate) }
+      { records: Person.hash_ouput(Person.sort_by_surname) }
     end
  	end
 end
