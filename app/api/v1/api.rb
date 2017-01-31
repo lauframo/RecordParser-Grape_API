@@ -11,11 +11,6 @@ module WestWing
     DATABASE.load
     RecordParser.parse_file('database.csv')
 
-
-    # For Rspec Testing, please make sure to comment out the line below before running the suite 
-    # @record = RecordParser.parse_file('api_records.csv')
-    # @record.each { |record| record.save(DATABASE) }
-  # p Person.all
     
   params do
     requires :LastName, type: String
