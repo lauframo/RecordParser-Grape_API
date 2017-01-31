@@ -26,7 +26,7 @@ class Database
   end
 
   def load
-    @content = CSV.open(self.file_name, "wb")
+    @content = CSV.open(self.file_name, "a")
   end
 end
 

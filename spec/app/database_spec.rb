@@ -20,7 +20,7 @@ describe Database do
     it 'allows you to load an existing database file' do
       database = Database.new('test.csv')
       database.load
-      database_file = File.read('test_database.csv')
+      database_file = File.read(database.file_name)
       expect(database_file.lines.count).to eq 3
   end
   end
@@ -44,8 +44,9 @@ describe Database do
       expect(database_file).to eq expected_string
     end
 
-    it 'appends new records to the end of the file' do
+    it 'appends new records to the end of a new file' do
       database = Database.new('test_database.csv')
+      database.refresh
       database.add(jed)
       database_file = File.read('test_database.csv')
       expect(database_file.lines.count).to eq 2
@@ -54,6 +55,15 @@ describe Database do
       database_file = File.read('test_database.csv')
       expect(database_file.lines.count).to eq 3
     end
+
+    it 'appends new records to the end of a loaded file' do
+      database = Database.new('test.csv')
+      database.load
+      database.add(toby)
+      database_file = File.read('test.csv')
+      expect(database_file.lines.count).to eq 4
+    end
+
   end
 
   # after(:all) { Database.new }
