@@ -38,7 +38,6 @@ curl --data "LastName=Zoey&FirstName=Barlett&FavoriteColor=lilacn&DateOfBirth=19
 
 ## Dependencies
 * Ruby 2.2 or greater
-* PostgreSQL
 * Sinatra
 * Shotgun
 
